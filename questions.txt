@@ -1,0 +1,7 @@
+* Are the listed features in order of priority?  If not, what would be the priority of features for each release?
+* Does acccess to the application need to be secured (different levels of access)
+	* Is the memory kept between different sessions
+* One operatiopn at a time or multiple calculations before executing the answer
+
+2 week sprint?
+

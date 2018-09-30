@@ -1,0 +1,19 @@
+project structure:
+
+Angular/NGXS (for state management) front-end
+.net core backend
+
+
+npm install -g @angular/cli
+ng new calculator
+
+
+ng new calculator
+yarn add @ngxs/store
+yarn add @ngxs/logger-plugin @ngxs/devtools-plugin --dev
+
+ng g c components/calculator --spec=false
+ng g c components/index --spec=false
+
+yarn add bootstrap
+

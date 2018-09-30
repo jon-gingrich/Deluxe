@@ -1,0 +1,15 @@
+<div *ngIf="calculations">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Calculation History</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let calculation of calculations | async">
+        <td>{{ calculation.calculationDisplay }}</td>    
+		<td>{{ calculation.answer }}</td>		
+      </tr>
+    </tbody>
+  </table>
+</div>
