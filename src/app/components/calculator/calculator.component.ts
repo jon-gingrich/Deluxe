@@ -55,7 +55,9 @@ export class CalculatorComponent implements OnInit {
   }
   
   public memoryRecall() {	
-	this.setCurrent(this.memory);	
+	  if(this.memory !== "") {
+		this.setCurrent(this.memory, true);	
+	  }
   }
   
   public deleteNumber() {
