@@ -13,23 +13,17 @@ export class CalcDataService {
   createCalc(leftVal: number, operator: string, rightVal: number){
 	  
 	var result;
-  
+ 
 	switch(operator) {
 	 
 	 case '/':
 		if(rightVal === 0) {
 			return "NaN";
-		}
-		result = leftVal / rightVal;
-		break;
-	 case 'x':
-		result = leftVal * rightVal;
-		break;		
-	 case '+': 
-		result = leftVal + rightVal;
-		break;
+		}		
+	 case 'x':				
+	 case '+': 		
 	 case '-':
-		result = leftVal - rightVal;
+		result = eval(leftVal + operator + rightVal);
 		break;	 
 	default:
 		throw new Error('Invalid operator provided');
