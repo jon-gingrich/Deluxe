@@ -14,6 +14,7 @@ import { Calculation } from '../../models/Calculation';
 })
 export class CalculatorComponent implements OnInit {
 
+	// Use ngxs datastore to manage state
 	calculations: Observable<Calculation>;
 
   constructor(private store: Store, private calcDataService: CalcDataService ) {
@@ -24,18 +25,29 @@ export class CalculatorComponent implements OnInit {
   
   }
   
-  
-  
+  // Number on left side of operator  
   private leftValue: number;
+  
+  // Number on right side of operator 
   private rightValue: number;
+  
+  // Store number saved for memory 
   private memory: string;
   
+  //Collect current number being entered in to calculator
   public currentValue = "";
+  
+  // Operator user has chosen
   public operator = "";
+  
+  // Current equation for display purposes
   public currentFormula = "";
  
   public answer = "";  
 
+  
+  // Updates the current value as it is entered in the calculator
+  // Upsates the currentForumla based on currentValue
   public setCurrent(value: string, clear: boolean = false) {	  
 	  
 	  if(clear) {
@@ -47,6 +59,9 @@ export class CalculatorComponent implements OnInit {
 	  this.answer = "";
   }
   
+  
+  // Sets the operator chosen, will reset currentValue to start capturing other entry after
+  // Updates currentFormula to show the added operator
   public setoperator(value: string) {
 	this.operator = value;
 	this.leftValue = +this.currentValue;
@@ -54,25 +69,30 @@ export class CalculatorComponent implements OnInit {
 	this.currentFormula = this.currentFormula + " " + value + " ";
   }
   
+  // Sets number to memory
   public addMemory() {	  
 	  this.memory = this.currentValue;
   }
   
+  // Erase the currently stored value
   public removeMemory() {
 	  this.memory = "";
   }
   
+  // Set current value to number stored in memory if not blank
   public memoryRecall() {	
 	  if(this.memory !== "") {
 		this.setCurrent(this.memory, true);	
 	  }
   }
   
+  // Allows user to delete the last individial number the entered in the stream
   public deleteNumber() {
   
 	this.setCurrent(this.currentValue.slice(0, -1), true);
   }
   
+  // Does the calculations when the user hits '=' sign
   public calculate() {
 	this.rightValue = +this.currentValue;
 	this.answer = this.calcDataService.createCalc(this.leftValue, this.operator, this.rightValue);	
@@ -80,6 +100,7 @@ export class CalculatorComponent implements OnInit {
 	this.setCurrent(this.answer,true);	
   }
 
+  // Alternates the sign of the last full number entered (left or right side)
   public alternateSign(){	  
 	if(this.operator !== "") {
 		  this.currentFormula = this.currentFormula.slice(0, this.currentFormula.lastIndexOf(this.currentValue))
@@ -89,7 +110,7 @@ export class CalculatorComponent implements OnInit {
 	  
   }
   
-  
+  // Resets the calculator so brand new information can be entered
   public reset() {
     this.currentValue = "";
 	this.currentFormula = "";
