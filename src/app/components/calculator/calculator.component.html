@@ -1,43 +1,60 @@
-  <div id='calc-contain'>
+  <div class="row">
+	  <div id='calc-contain' class="col-md-3">
 
-    <form name="calculator">
+		<form name="calculator">
 
-      <input type="text" name="formula" value={{this.currentFormula}} readonly />
-      <br />
+		  <input type="text" name="formula" value={{this.currentFormula}} readonly />
+		  <br />
 
-      <input type="text" name="answer" value={{this.answer}} readonly />
-      <br />
+		  
 
-      <input type="button" value=" 1 " (click)="setCurrent(1)"/>
-      <input type="button" value=" 2 " (click)="setCurrent(2)"/>
-      <input type="button" value=" 3 " (click)="setCurrent(3)"/>
-      <input type="button" value=" + " (click)="setOperand('+')"/>
-      <br />
+		  <input type="button" value=" 1 " (click)="setCurrent(1)"/>
+		  <input type="button" value=" 2 " (click)="setCurrent(2)"/>
+		  <input type="button" value=" 3 " (click)="setCurrent(3)"/>
+		  <input type="button" value=" + " (click)="setoperator('+')"/>
+		  <br />
 
-      <input type="button" value=" 4 " (click)="setCurrent(4)"/>
-      <input type="button" value=" 5 " (click)="setCurrent(5)"/>
-      <input type="button" value=" 6 " (click)="setCurrent(6)"/>
-      <input type="button" value=" - " (click)="setOperand('-')"/>
-      <br />
+		  <input type="button" value=" 4 " (click)="setCurrent(4)"/>
+		  <input type="button" value=" 5 " (click)="setCurrent(5)"/>
+		  <input type="button" value=" 6 " (click)="setCurrent(6)"/>
+		  <input type="button" value=" - " (click)="setoperator('-')"/>
+		  <br />
 
-      <input type="button" value=" 7 " (click)="setCurrent(7)"/>
-      <input type="button" value=" 8 " (click)="setCurrent(8)"/>
-      <input type="button" value=" 9 " (click)="setCurrent(9)"/>
-      <input type="button" value=" x " (click)="setOperand('x')"/>
-      <br />
+		  <input type="button" value=" 7 " (click)="setCurrent(7)"/>
+		  <input type="button" value=" 8 " (click)="setCurrent(8)"/>
+		  <input type="button" value=" 9 " (click)="setCurrent(9)"/>
+		  <input type="button" value=" x " (click)="setoperator('x')"/>
+		  <br />
 
-      <input type="button" value=" ± " (click)="alternateSign()"/>
-      <input type="button" value=" 0 " (click)="setCurrent(0)"/>
-      <input type="button" value=" = " (click)="calculate()"/>
-      <input type="button" value=" / " (click)="setOperand('/')"/>
+		  <input type="button" value=" ± " (click)="alternateSign()"/>
+		  <input type="button" value=" 0 " (click)="setCurrent(0)"/>
+		  <input type="button" value=" = " (click)="calculate()"/>
+		  <input type="button" value=" / " (click)="setoperator('/')"/>
 
-      <input type="button" value=" c " (click)="reset()"/>
-      <input type="button" value=" m+ " (click)="addMemory()"/>
-      <input type="button" value=" m- " (click)="removeMemory()"/>
-      <input type="button" value=" MRC " (click)="memoryRecall()"/>
-      <br />
-      <input type="button" value=" DEL " (click)="deleteNumber()"/>
-      <br />
-    </form>
+		  <input type="button" value=" c " (click)="reset()"/>
+		  <input type="button" value=" m+ " (click)="addMemory()"/>
+		  <input type="button" value=" m- " (click)="removeMemory()"/>
+		  <input type="button" value=" MRC " (click)="memoryRecall()"/>
+		  <br />
+		  <input type="button" value=" DEL " (click)="deleteNumber()"/>
+		  <br />
+		</form>
+	  </div>
+  
+	  <div *ngIf="calculations" class="col-md-6">
+		  <table class="table table-striped">
+			<thead>
+			  <tr>
+				<th>Calculation History</th>        
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr *ngFor="let calculation of calculations | async">
+				<td>{{ calculation.calculationDisplay }}</td>    
+				<td>{{ calculation.answer }}</td>		
+			  </tr>
+			</tbody>
+		  </table>
+	</div>
   </div>
    

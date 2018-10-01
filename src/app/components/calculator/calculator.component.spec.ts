@@ -53,10 +53,10 @@ describe('CalculatorComponent', () => {
 		expect(component.currentValue).toEqual("12345");
 	}));	
 	
-	it('setOperand should set partial currentFormula for left value plus space and operand', async(() => {
+	it('setoperator should set partial currentFormula for left value plus space and operator', async(() => {
 		
 		component.currentFormula = "12345";		
-		component.setOperand("+");		
+		component.setoperator("+");		
 		
 		expect(component.currentFormula).toEqual("12345 + ");
 	}));

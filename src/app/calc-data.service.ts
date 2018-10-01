@@ -10,11 +10,11 @@ export class CalcDataService {
   constructor() { }
   
   
-  createCalc(leftVal: number, operand: string, rightVal: number){
+  createCalc(leftVal: number, operator: string, rightVal: number){
 	  
 	var result;
   
-	switch(operand) {
+	switch(operator) {
 	 
 	 case '/':
 		if(rightVal === 0) {
@@ -31,6 +31,8 @@ export class CalcDataService {
 	 case '-':
 		result = leftVal - rightVal;
 		break;	 
+	default:
+		throw new Error('Invalid operator provided');
 	} 
  
 	return result; 

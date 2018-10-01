@@ -11,6 +11,7 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
 import { IndexComponent } from './components/index/index.component';
 
 import { CalculatorState } from './state/calculator.state';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CalculatorState } from './state/calculator.state';
       CalculatorState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),	
+    NgxsLoggerPluginModule.forRoot(),
+    AppRoutingModule,	
   ],
   providers: [],
   bootstrap: [AppComponent]
