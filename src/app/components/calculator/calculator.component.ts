@@ -4,6 +4,7 @@ import { Compute } from '../../actions/calculation.action';
 import {CalcDataService} from '../../calc-data.service';
 import { Observable } from 'rxjs';
 import { Calculation } from '../../models/Calculation';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-calculator',
@@ -13,11 +14,29 @@ import { Calculation } from '../../models/Calculation';
   
 })
 export class CalculatorComponent implements OnInit {
+	
+	// Bind keypress to use numerical keypad
+	@HostListener('document:keypress', ['$event'])
+	handleKeyboardEvent(event: KeyboardEvent) { 
+    if(Number(event.key)) { 
+			this.setCurrent(event.key);
+		}		
+	else if(event.keyCode === 13 ) { 
+			this.calculate();
+		}
+	// See if one of the keys is accepted operator
+	else if( [42,43,45,47].indexOf(event.keyCode) > -1){ 
+		this.setOperator(event.key);
+	}
+  }
 
 	// Use ngxs datastore to manage state
 	calculations: Observable<Calculation>;
 
   constructor(private store: Store, private calcDataService: CalcDataService ) {
+	  
+	  // Assign the calculation done by the user to the calculations collection
+	  // to bve displayed in history.
 	  this.calculations = this.store.select(state => state.calculations.calculations);
   }
 
@@ -62,7 +81,7 @@ export class CalculatorComponent implements OnInit {
   
   // Sets the operator chosen, will reset currentValue to start capturing other entry after
   // Updates currentFormula to show the added operator
-  public setoperator(value: string) {
+  public setOperator(value: string) {
 	this.operator = value;
 	this.leftValue = +this.currentValue;
 	this.currentValue = "";
@@ -116,5 +135,4 @@ export class CalculatorComponent implements OnInit {
 	this.currentFormula = "";
 	this.answer = "";
   }
-
 }
